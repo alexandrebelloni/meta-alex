@@ -1,0 +1,46 @@
+commit f6783df042a8bc2fe1306b5843459fe5d3d2d4b6
+Author: Alexandre Belloni <alexandre.belloni@piout.net>
+Date:   Mon Dec 24 16:26:23 2012 +0100
+
+    Change time format
+
+diff --git a/histlog2300.c b/histlog2300.c
+old mode 100755
+new mode 100644
+index 727ca93..9fe6bb8
+--- a/histlog2300.c
++++ b/histlog2300.c
+@@ -250,8 +250,8 @@ int main(int argc, char *argv[])
+ 		time_lastrecord_tm.tm_min += interval;
+ 		mktime(&time_lastrecord_tm);                 //normalize time_lastlog_tm
+ 		
+-		strftime(datestring, sizeof(datestring), "%Y%m%d%H%M%S %Y-%b-%d %H:%M:%S",
+-		         &time_lastrecord_tm);
++		strftime(datestring, sizeof(datestring), "%s %F %T%z",
++		         localtime(&time_lastrecord_tm));
+ 
+ 		// Print out
+ 		fseek(fileptr, 0L, SEEK_END);
+diff --git a/log2300.c b/log2300.c
+index 591b944..d86df97 100755
+--- a/log2300.c
++++ b/log2300.c
+@@ -65,6 +65,8 @@ int main(int argc, char *argv[])
+ 	struct config_type config;
+ 	time_t basictime;
+ 
++	time(&basictime);
++
+ 	get_configuration(&config, argv[2]);
+ 
+ 	ws2300 = open_weatherstation(config.serial_device_name);
+@@ -161,8 +163,7 @@ int main(int argc, char *argv[])
+ 
+ 	/* GET DATE AND TIME FOR LOG FILE, PLACE BEFORE ALL DATA IN LOG LINE */
+ 
+-	time(&basictime);
+-	strftime(datestring, sizeof(datestring), "%Y%m%d%H%M%S %Y-%b-%d %H:%M:%S",
++	strftime(datestring, sizeof(datestring), "%s %F %T%z",
+ 	         localtime(&basictime));
+ 
+ 

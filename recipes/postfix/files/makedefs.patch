@@ -1,0 +1,21 @@
+diff -burp postfix-2.9.3.org/makedefs postfix-2.9.3/makedefs
+--- postfix-2.9.3.org/makedefs	2012-12-23 17:10:36.312229736 +0100
++++ postfix-2.9.3/makedefs	2012-12-23 17:12:02.392226139 +0100
+@@ -284,7 +284,7 @@ case "$SYSTEM.$RELEASE" in
+ 		    echo "No <db.h> include file found." 1>&2
+ 		    echo "Install the appropriate db*-devel package first." 1>&2
+ 		    echo "See the RELEASE_NOTES file for more information." 1>&2
+-		    exit 1
++		    #exit 1
+ 		fi
+ 		# GDBM locks the DBM .pag file after open. This breaks postmap.
+ 		# if [ -f /usr/include/gdbm-ndbm.h ]
+@@ -362,7 +362,7 @@ EOF
+ 		    echo "No <db.h> include file found." 1>&2
+ 		    echo "Install the appropriate db*-devel package first." 1>&2
+ 		    echo "See the RELEASE_NOTES file for more information." 1>&2
+-		    exit 1
++		    #exit 1
+ 		fi
+ 		SYSLIBS="-ldb"
+ 		for name in nsl resolv

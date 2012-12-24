@@ -1,0 +1,50 @@
+diff -burp postfix-2.9.3.org/postfix-install postfix-2.9.3/postfix-install
+--- postfix-2.9.3.org/postfix-install	2012-12-23 18:14:38.008069066 +0100
++++ postfix-2.9.3/postfix-install	2012-12-23 18:14:56.324068299 +0100
+@@ -201,8 +201,8 @@ test -z "$non_interactive" -a ! -t 0 &&
+     exit 1
+ }
+ 
+-test -x bin/postconf || {
+-    echo $0: Error: no bin/postconf file. Did you forget to run \"make\"? 1>&2
++test -x $POSTCONF || {
++    echo $0: Error: no $POSTCONF file. Did you forget to run \"make\"? 1>&2
+     exit 1
+ }
+ 
+@@ -363,7 +363,7 @@ HTML files. Specify \"no\" if you do not
+ 
+ : ${install_root=/}
+ : ${tempdir=`pwd`}
+-: ${config_directory=`bin/postconf -c conf -h -d config_directory`}
++: ${config_directory=`$POSTCONF -c conf -h -d config_directory`}
+ 
+ # Find out the location of installed configuration files.
+ 
+@@ -433,7 +433,7 @@ test -f $CONFIG_DIRECTORY/main.cf && {
+ 	case "$junk" in
+ 	"") eval unset $name;;
+ 	esac
+-	eval : \${$name=\`bin/postconf -c $CONFIG_DIRECTORY -h $name\`} ||
++	eval : \${$name=\`$POSTCONF -c $CONFIG_DIRECTORY -h $name\`} ||
+ 	    exit 1
+     done
+ }
+@@ -446,7 +446,7 @@ do
+     case "$junk" in
+     "") eval unset $name;;
+     esac
+-    eval : \${$name=\`bin/postconf -c conf -d -h $name\`} || exit 1
++    eval : \${$name=\`$POSTCONF -c conf -d -h $name\`} || exit 1
+ done
+ 
+ # Override settings manually.
+@@ -724,7 +724,7 @@ do
+ # Postfix releases, and software should not suddenly be installed in
+ # the wrong place when Postfix is being upgraded.
+ 
+-bin/postconf -c $CONFIG_DIRECTORY -e \
++$POSTCONF -c $CONFIG_DIRECTORY -e \
+     "daemon_directory = $daemon_directory" \
+     "data_directory = $data_directory" \
+     "command_directory = $command_directory" \
