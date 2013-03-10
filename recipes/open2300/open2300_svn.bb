@@ -1,6 +1,6 @@
 SECTION = "console/network"
 DESCRIPTION = "Open2300 is a package of software tools that reads (and writes) data from a Lacrosse WS2300/WS2305/WS2310/WS2315 Weather Station."
-LICENSE = "GPL"
+LICENSE = "GPLv2+"
 PR = "r1"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
